@@ -1,0 +1,15 @@
+LIBNAME alura "/home/u63670019/Curso1_Alura_SAS";
+
+
+Proc Datasets
+	lib=alura;
+RUN;
+
+Proc Contents
+	 data= alura.cadastro_produto;
+RUN;
+
+Proc Print
+	data=alura.cadastro_produto;
+RUN;
+
