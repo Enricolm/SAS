@@ -2,14 +2,51 @@ LIBNAME alura "/home/u63670019/Curso1_Alura_SAS";
 
 
 Proc Datasets
-	lib=alura;
+	lib=alura details;
 RUN;
 
+
 Proc Contents
-	 data= alura.cadastro_produto;
+	data=alura.cadastro_produto;
 RUN;
 
 Proc Print
 	data=alura.cadastro_produto;
 RUN;
+
+
+Proc Contents
+	data=alura.cadastro_cliente;
+RUN;
+
+Proc Print
+	data=alura.cadastro_produto;
+RUN;
+
+Proc Freq
+	data=alura.cadastro_produto nlevels;
+	table genero plataforma nome;
+RUN;
+
+
+Data data_cadastro_produto;
+set alura.cadastro_produto;
+
+if data > 201605
+	Then lancamento = 1;
+	else lancamento = 0;
+
+RUN;
+
+
+Proc Print
+	data=data_cadastro_produto;
+RUN;
+
+
+proc freq
+	data=data_cadastro_produto nlevels;
+	table lancamento;
+RUN;	
+
 
