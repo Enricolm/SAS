@@ -50,3 +50,88 @@ proc freq
 RUN;	
 
 
+
+
+LIBNAME dados "/home/u63670019/Curso1_Alura_SAS";
+
+
+proc print
+	data= dados.cadastro_produto;
+run;
+
+
+data dados_consulta;
+set dados.cadastro_produto;
+RUN;
+
+data dados_consulta;
+set dados.cadastro_produto(rename=(data  = Date));
+RUN;
+
+
+
+
+proc freq
+	data= dados_consulta;
+	table Nome;
+	where Date = .;
+RUN;
+
+data dados_missing;
+set dados_consulta;
+where date is missing;
+RUN;
+	
+
+proc print data= dados_missing; RUN;
+
+
+proc freq 
+	data=dados_consulta
+	(where=(date is missing));
+	table nome
+	/list;
+RUN; 
+
+
+proc freq 
+	data=dados_consulta
+	(where=(date is missing and nome in ("Fireshock", "Forgotten Echo", "Soccer")));
+	table nome;
+
+RUN;
+
+
+proc sort 
+	data=dados_consulta;
+	by nome date;
+run;
+
+proc freq 
+	data = dados_consulta;
+	tables nome * date / out=frequencias;
+RUN;
+
+
+data tratando_dados;
+set dados_consulta;
+
+if date is missing Then DO;
+	if nome = "Fireshock" Then Date = 2016
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
